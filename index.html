@@ -60,7 +60,16 @@
   .bg-flowers span:nth-child(13){left:88%;animation-duration:10.8s;animation-delay:.8s;font-size:38px}
   .bg-flowers span:nth-child(14){left:95%;animation-duration:12.6s;animation-delay:1.2s;font-size:42px}
 
-  header{ position:relative; z-index:1; text-align:center; padding:36px 18px 22px; }
+  /* Portada centrada verticalmente (más abajo) */
+  header{
+    position:relative; z-index:1;
+    min-height:88vh;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    text-align:center;
+    padding:32px 18px;
+    gap:10px;
+  }
   header h1{ margin:0; font-size:2.2rem; color:#c661ff; letter-spacing:.4px; }
   @media (max-width:480px){ header h1{ font-size:1.6rem } }
   .name{ font-family:'smallwrite',"Segoe Script","Brush Script MT",cursive; font-weight:700; }
@@ -313,7 +322,7 @@
     <h2>💌 Video 3</h2>
     <div class="envelope-wrap">
       <div class="label">Haz clic en el sobre para abrir, mi princesa 👸🏻</div>
-    <div class="envelope heart" data-target="reveal-video-3" title="Abrir 'Video 3'"></div>
+      <div class="envelope heart" data-target="reveal-video-3" title="Abrir 'Video 3'"></div>
 
       <div id="reveal-video-3" class="reveal">
         <div class="card">
@@ -367,12 +376,13 @@
       <div id="reveal-song-1" class="reveal">
         <div class="card">
           <div class="yt-wrap">
-            <iframe src="https://drive.google.com/file/d/1zX8y7L47Lri0Fcl_SSPlsH9leyEWT63q/preview"
+            <!-- PRIMER LINK ACTUALIZADO -->
+            <iframe src="https://drive.google.com/file/d/1Bm8JzudmoQqjSBIgIGk4H4ZT40U-msgx/preview"
               allow="autoplay; encrypted-media" loading="lazy"
               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <p style="text-align:center;margin-top:10px">
-            <a href="https://drive.google.com/file/d/1zX8y7L47Lri0Fcl_SSPlsH9leyEWT63q/view" target="_blank" rel="noopener">Abrir en Google Drive</a>
+            <a href="https://drive.google.com/file/d/1Bm8JzudmoQqjSBIgIGk4H4ZT40U-msgx/view" target="_blank" rel="noopener">Abrir en Google Drive</a>
           </p>
         </div>
       </div>
@@ -399,7 +409,6 @@
     </div>
   </section>
 
-  <!-- ENLACE 3 ACTUALIZADO -->
   <section class="section" id="sec-song-3">
     <h2>🎵 Canción dedicada 3</h2>
     <div class="envelope-wrap">
@@ -632,3 +641,4 @@ showAllBtn.addEventListener('click', ()=>{
 </script>
 </body>
 </html>
+
