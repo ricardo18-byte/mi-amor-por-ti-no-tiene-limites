@@ -60,7 +60,7 @@
   .bg-flowers span:nth-child(13){left:88%;animation-duration:10.8s;animation-delay:.8s;font-size:38px}
   .bg-flowers span:nth-child(14){left:95%;animation-duration:12.6s;animation-delay:1.2s;font-size:42px}
 
-  /* Portada centrada verticalmente (más abajo) */
+  /* Portada centrada verticalmente */
   header{
     position:relative; z-index:1;
     min-height:88vh;
@@ -292,26 +292,27 @@
     </div>
   </section>
 
-  <!-- 💌 Video 2 (Drive) — ACTUALIZADO -->
+  <!-- 💌 Video 2 (Drive) -->
   <section class="section" id="sec-video2">
     <h2>💌 Video 2</h2>
     <div class="envelope-wrap">
       <div class="label">Haz clic en el sobre para abrir, mi catarina guapa 🐞</div>
       <div class="envelope heart" data-target="reveal-video-2" title="Abrir 'Video 2'"></div>
 
-    <div id="reveal-video-2" class="reveal">
-      <div class="card">
-        <div class="yt-wrap">
-          <iframe
-            src="https://drive.google.com/file/d/1Mx6RL1bCJbr4n3RH6hNGeuenCpLu6zGH/preview"
-            allow="autoplay; encrypted-media"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen></iframe>
+      <div id="reveal-video-2" class="reveal">
+        <div class="card">
+          <div class="yt-wrap">
+            <iframe
+              src="https://drive.google.com/file/d/1Mx6RL1bCJbr4n3RH6hNGeuenCpLu6zGH/preview"
+              allow="autoplay; encrypted-media"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+          <p style="text-align:center;margin-top:10px">
+            <a href="https://drive.google.com/file/d/1Mx6RL1bCJbr4n3RH6hNGeuenCpLu6zGH/view?usp=drivesdk" target="_blank" rel="noopener">Abrir en Google Drive</a>
+          </p>
         </div>
-        <p style="text-align:center;margin-top:10px">
-          <a href="https://drive.google.com/file/d/1Mx6RL1bCJbr4n3RH6hNGeuenCpLu6zGH/view?usp=drivesdk" target="_blank" rel="noopener">Abrir en Google Drive</a>
-        </p>
       </div>
     </div>
   </section>
@@ -321,7 +322,7 @@
     <h2>💌 Video 3</h2>
     <div class="envelope-wrap">
       <div class="label">Haz clic en el sobre para abrir, mi princesa 👸🏻</div>
-      <div class="envelope heart" data-target="reveal-video-3" title="Abrir 'Video 3'"></div>
+    <div class="envelope heart" data-target="reveal-video-3" title="Abrir 'Video 3'"></div>
 
       <div id="reveal-video-3" class="reveal">
         <div class="card">
@@ -375,7 +376,6 @@
       <div id="reveal-song-1" class="reveal">
         <div class="card">
           <div class="yt-wrap">
-            <!-- PRIMER LINK ACTUALIZADO -->
             <iframe src="https://drive.google.com/file/d/1Bm8JzudmoQqjSBIgIGk4H4ZT40U-msgx/preview"
               allow="autoplay; encrypted-media" loading="lazy"
               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -516,23 +516,49 @@
 
 <script>
 /* ---------- Mostrar secciones al pulsar Continuar ---------- */
-const enterBtn = document.getElementById('enterBtn');
-const toolbar = document.getElementById('toolbar');
+const enterBtn  = document.getElementById('enterBtn');
+const toolbar   = document.getElementById('toolbar');
+const headerEl  = document.getElementById('top');
+
+/* ------- Referencias para “100 razones” (declarar UNA sola vez) ------- */
+let idx = 0;
+const reasonCard  = document.getElementById('reasonCard');
+const prevBtn     = document.getElementById('prevBtn');
+const nextBtn     = document.getElementById('nextBtn');
+const showAllBtn  = document.getElementById('showAllBtn');
+const allList     = document.getElementById('allList');
+const reasonsList = document.getElementById('reasonsList');
+
 enterBtn.addEventListener('click', ()=>{
   document.querySelectorAll('.section').forEach(s => s.style.display='block');
-  document.getElementById('top').style.display='none';
+  headerEl.style.display='none';
   toolbar.style.display='block';
   window.scrollTo({top:0, behavior:'smooth'});
 });
 
-/* ---------- Botón Regresar al inicio ---------- */
+/* ---------- Botón Regresar al inicio: restaura estado INICIAL ---------- */
 const backHome = document.getElementById('backHome');
-backHome.addEventListener('click', ()=>{
+
+function pauseAllEmbeds(){
   document.querySelectorAll('.reveal iframe').forEach(ifr => { const s = ifr.src; ifr.src = s; });
+}
+function resetReasonsModule(){
+  idx = 0;
+  reasonCard.textContent = 'Haz clic en «Siguiente» para empezar a ver mis razones, lunita 🌙';
+  prevBtn.style.display = 'none';
+  nextBtn.style.display = 'inline-block';
+  allList.style.display = 'none';
+  reasonsList.innerHTML = '';
+  delete reasonsList.dataset.filled;
+}
+
+backHome.addEventListener('click', ()=>{
+  pauseAllEmbeds();
   document.querySelectorAll('.reveal').forEach(r => r.style.display='none');
   document.querySelectorAll('.section').forEach(s => s.style.display='none');
-  document.getElementById('top').style.display='block';
+  headerEl.style.display='block';
   toolbar.style.display='none';
+  resetReasonsModule();
   window.scrollTo({top:0, behavior:'smooth'});
 });
 
@@ -604,14 +630,6 @@ const reasons = [
 "Porque sé escuchar y quiero hacerlo mejor","Porque contigo todo tiene sentido de nuevo y quiero que sea eterno"
 ];
 
-let idx = 0;
-const reasonCard = document.getElementById('reasonCard');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const showAllBtn = document.getElementById('showAllBtn');
-const allList = document.getElementById('allList');
-const reasonsList = document.getElementById('reasonsList');
-
 function renderListOnce(){
   if(reasonsList.dataset.filled) return;
   reasons.forEach((r,i)=>{
@@ -640,5 +658,4 @@ showAllBtn.addEventListener('click', ()=>{
 </script>
 </body>
 </html>
-
 
